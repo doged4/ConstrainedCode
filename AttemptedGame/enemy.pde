@@ -3,7 +3,9 @@ class Enemy{
  final private float X_INITIAL, Y_INITIAL;
  float step;
  final private float RANGE;
- final private PImage COSTUME_A, COSTUME_B;
+ final private PImage COSTUME_A, COSTUME_B, COSTUME_SHOT;
+ boolean shot;
+ int shotCount;
  
   public Enemy(float _x, float _y, PImage _costumeA, PImage _costumeB){
     this.X_INITIAL = _x;
@@ -12,14 +14,22 @@ class Enemy{
     this.RANGE = 100;
     this.COSTUME_A = _costumeA;
     this.COSTUME_B = _costumeB;
+    this.COSTUME_SHOT = loadImage("enemyBlip.png");
     };
   private void display()
   {
-    if(int(this.step/25 % 2)==0){
-      image(this.COSTUME_A, x, y, 45, 30);
+    if(this.shotCount < 10 && this.shotCount > 0){
+      image(this.COSTUME_SHOT, x, y, 45, 30);
     }else{
-      image(this.COSTUME_B, x, y, 45, 30);
-    }
+      if(int(this.step/25 % 2)==0){
+        image(this.COSTUME_A, x, y, 45, 30);
+      }else{
+        image(this.COSTUME_B, x, y, 45, 30);
+      }
+     // if(this.shot){
+       // image(this.COSTUME_SHOT, x, y, 45, 30);
+      //};
+    } 
     
   }
   private void update(float speed){
